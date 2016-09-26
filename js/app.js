@@ -5,46 +5,57 @@ function randomRange(max, min){
 		var myRange = randomRange(0, 100);
 		console.log(myRange);
 
-function newGame(){		
+function newGame(){	
+	myRange = randomRange(0, 100);
+	$('#count').html(0);
 }
 
 $(document).ready(function(){
 //when you click new game
 	$('.new').click(function(){
-		//randomRange();
-
-		//console.log(randomRange);
-		//newGame();
-	})
+		
+		newGame();
+	});
 	$('#guessButton').click(function(event){
 			event.preventDefault();
 
 			var number = $('#userGuess').val();	
+			//clear input bar
+			$('#userGuess').val('');
+			//prevent non number entry
+			if(number % 1 !==0 || number===''){
+				$('#feedback').html('Enter Number');
+				return;
+			}
 			//track numbers guessed
 			$('#guessList').append('<li>' + number + '</li>');
 			//track number of many guesses
 			$('#count').html(function(i, val){
 				return +val +1;
-			})//;
-			//clear input bar
-			$('#userGuess').val('');
+			});
 			//hot or cold range
-				if(userGuess=>50){
-					console.log('Ice Cold');
+				if(number <= myRange + 50 && number >= myRange - 50){
+					$('#feedback').html('Ice Cold');
 				}
-				if(val=30-50){
-					console.log('Cold');
-				}
-				if(i=20-30){
-					console.log('Warm');
-				}
-				if(i=10-20){
-					console.log('Hot');
-				}
-				if(i=1-10){
-					console.log('Very Hot');
+				else {
+					if(number <= myRange + 40 && number >= myRange - 40){
+						$('#feedback').html('Cold');
+					}
+					else if(number <= myRange + 30 && number >= myRange - 30){
+						$('#feedback').html('Warm');
+					}
+					else if(number <= myRange + 20 && number >= myRange - 20){
+						$('#feedback').html('Hot');
+					}
+					else if(number <= myRange + 10 && number >= myRange - 10){
+						$('#feedback').html('Very Hot');
+					}
+					else if(number === myRange){
+						$('#feedback').html('Congratulation You Guessed Correctly!');
+					}
 				}
 		});
+	
 	
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
@@ -63,7 +74,7 @@ $(document).ready(function(){
 /*steps
 `1.start new game (button)
 ~2.generate random number from 1-100
-3.have peerson make guess in input (must be from 1-100)
+`3.have peerson make guess in input (must be from 1-100)
 `4.make hot or cold range (display in h2#feedback)(50 or further= "ice cold", 30-50 = "cold, 20-30 = warm, 10-20 = "hot, 1-10 ="very hot")
 ~5.track number of guesses
 ~6.track guessed numbers (as <li> to ul #nguessList) 

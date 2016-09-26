@@ -34,26 +34,21 @@ $(document).ready(function(){
 				return +val +1;
 			});
 			//hot or cold range
-				if(number <= myRange + 50 && number >= myRange - 50){
+			if(number == myRange){
+				$('#feedback').html('Congratulation You Guessed Correctly!');
+			} else { 
+				if(number <= myRange + 10 && number >= myRange - 10){
+					$('#feedback').html('Very Hot');
+				} else if(number <= myRange + 20 && number >= myRange - 20){
+					$('#feedback').html('Hot');
+				} else if(number <= myRange + 30 && number >= myRange - 30){
+					$('#feedback').html('Warm');
+				} else if(number <= myRange + 30 && number >= myRange - 30){
+					$('#feedback').html('Warm');
+				} else {
 					$('#feedback').html('Ice Cold');
 				}
-				else {
-					if(number <= myRange + 40 && number >= myRange - 40){
-						$('#feedback').html('Cold');
-					}
-					else if(number <= myRange + 30 && number >= myRange - 30){
-						$('#feedback').html('Warm');
-					}
-					else if(number <= myRange + 20 && number >= myRange - 20){
-						$('#feedback').html('Hot');
-					}
-					else if(number <= myRange + 10 && number >= myRange - 10){
-						$('#feedback').html('Very Hot');
-					}
-					else if(number === myRange){
-						$('#feedback').html('Congratulation You Guessed Correctly!');
-					}
-				}
+			}
 		});
 	
 	
